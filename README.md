@@ -12,6 +12,8 @@ Src on [Github](http://friz-zy.github.com)
 Code under **MIT license**
 
 For quick use copy to bash:
+`python pass.py`
+Or change 'pass.py' to you'r salt file and use:
 `python -c "import hashlib, getpass;from itertools import cycle, izip;f = open('pass.py');salt = f.read();f.close();print hashlib.sha512(''.join(chr(ord(x) ^ ord(y)) for (x,y) in izip(hashlib.sha512(''.join(chr(ord(x) ^ ord(y)) for (x,y) in izip(salt, cycle(raw_input('nick:') + ' : ' + raw_input('site:'))))).hexdigest(), cycle(getpass.getpass())))).hexdigest()[:32]"`
 
 *Filipp Frizzy aka filipp.s.frizzy@gmail.com*
