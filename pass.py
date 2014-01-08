@@ -47,6 +47,8 @@ if "#" in salt[-1][1]:
 # XOR function, thk The Internet
 def xor(ss, key):
     key = cycle(key)
+    if six.PY3:
+        return ''.join(chr(ord(x) ^ ord(y)) for (x,y) in izip(ss, key)).encode()
     return ''.join(chr(ord(x) ^ ord(y)) for (x,y) in izip(ss, key))
 
 # use this code as salt
@@ -55,11 +57,7 @@ with open('pass.py') as f:
 
 nick = raw_input("nick:") + " : " + raw_input("site:")
 firstXor = xor(salt, nick)
-if six.PY3:
-    firstXor = firstXor.encode()
 firstSha = hashlib.sha512(firstXor).hexdigest()
 secondXor = xor(firstSha, getpass.getpass())
-if six.PY3:
-    secondXor = secondXor.encode()
 six.print_((hashlib.sha512(secondXor).hexdigest()[:32]))
 ##
